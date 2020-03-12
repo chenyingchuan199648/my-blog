@@ -29,7 +29,6 @@ public class AdminUserServiceImp implements AdminUserService {
                 result.setResultState("0");
                 result.setResulteMessage("密码不正确！");
             }
-
         }
         return result;
     }
