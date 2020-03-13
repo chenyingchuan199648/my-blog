@@ -26,7 +26,7 @@ public class AdminUserServiceImp implements AdminUserService {
                 result.setResultState("0");
                 result.setResulteMessage("登陆成功！");
             }else {
-                result.setResultState("0");
+                result.setResultState("1");
                 result.setResulteMessage("密码不正确！");
             }
         }
