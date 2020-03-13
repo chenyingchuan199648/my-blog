@@ -15,33 +15,29 @@ public class AdminLoginController {
 
     @Autowired
     private AdminUserService adminUserService;
-    @Autowired
-    private Result result;
+    private Result result=null;
 
     @PostMapping("/login")
-    public String login( String username,
+    @ResponseBody
+    public Result login( String username,
                          String password,
                          String verifyCode,
-                        HttpSession session,
-                        Model model){
+                        HttpSession session
+                        ){
         if (username!=null||password!=null||verifyCode!=null){
             String verifyKey=(String) session.getAttribute("verifyCode");
             if (!verifyCode.equals(verifyKey)){
+                result.setResultState("1");
                 result.setResulteMessage("验证码错误");
             }else {
                 result=adminUserService.login(username,password,verifyCode);
-                if (result.getResultState()=="0"){  //登陆成功
-                    return "redirect:/manager/operate";
-                }
             }
         }
-        model.addAttribute("result",result);
-        return "login";
+        return result;
     }
 
     @GetMapping("/tologin")
     public String toLogin(Model model){
-        model.addAttribute("result",result);
         return "login";
     }
 }
